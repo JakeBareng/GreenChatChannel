@@ -1,9 +1,8 @@
 import { GoogleAuthProvider, signInWithRedirect } from "firebase/auth";
 
-const provider = new GoogleAuthProvider();
-
-function SignInEvent(auth) {
-    signInWithRedirect(auth,provider);
+async function SignInEvent(auth) {
+    const provider = new GoogleAuthProvider();
+    await signInWithRedirect(auth,provider);
 }
 function SignIn(props) {
     const { auth } = props;

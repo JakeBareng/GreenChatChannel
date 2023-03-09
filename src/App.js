@@ -10,6 +10,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import SignIn from './SignIn';
 import ChatRoom from './ChatRoom';
 import { getAuth } from 'firebase/auth';
+import { getFirestore } from 'firebase/firestore';
 
 const app = firebase.initializeApp({
   apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
@@ -23,12 +24,13 @@ const app = firebase.initializeApp({
 
 const auth = getAuth(app);
 const firestore = firebase.firestore();
+const db = getFirestore(app);
 
 function App() {
   const [user] = useAuthState(auth);
   return (
     <div className="App">
-      { user? <ChatRoom/> : <SignIn auth={auth}/> }
+      { user? <ChatRoom db={db}/> : <SignIn auth={auth}/> }
     </div>
   );
 }
