@@ -4,7 +4,6 @@ import 'firebase/compat/auth';
 import 'firebase/compat/firestore';
 
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { useCollectionData } from 'react-firebase-hooks/firestore';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 import SignIn from './SignIn';

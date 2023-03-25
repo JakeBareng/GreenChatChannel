@@ -1,23 +1,20 @@
-import { collection, getDoc, query } from "firebase/firestore"
-import React, { useEffect } from "react";
+import { collection, limit, orderBy, query } from "firebase/firestore"
 import { useCollection } from "react-firebase-hooks/firestore";
 import Message from "./Message";
 
 
+
 function Chat({ db }) {
     const [snapshot, loading, error] = useCollection(
-        collection(db, "messages"),
-        {
-            snapshotListenOptions: { includeMetadataChanges: true },
-        }
+        query(collection(db,"messages"),limit(6),orderBy("timestamp","desc"))
     )
 
     return (
         <div id="chat-container">
             {error && <strong>Error: {JSON.stringify(error)}</strong>}
             {loading && <span>Collection: Loading...</span>}
-            {snapshot && 
-                snapshot.docs.map((doc) => {
+            {snapshot &&  
+                snapshot.docs.reverse().map((doc) => {
                     return <Message key={doc.id} doc={doc} />
                 })
             }

@@ -15,7 +15,7 @@ function getUserName() {
     return getAuth().currentUser.displayName;
 }
 
-async function handleEvent(message, db) {
+async function sendMessage(message, db) {
     if (message === "") return;
     const messages = collection(db, "messages");
     try {
@@ -41,9 +41,9 @@ function ChatRoom({ db }) {
             }} value={input}></input>
 
             <button onClick={() => {
-                handleEvent(input, db)
+                sendMessage(input, db)
                 setInput("")
-            }}>input</button>
+            }}>send</button>
             
         </div>
     )

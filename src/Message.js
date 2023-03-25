@@ -1,7 +1,10 @@
 function Message({doc}) {
+    const data = doc.data()
     return (
         <div>
-            {doc.data().text}
+            <img src={data.pfp} />
+            {data.name}
+            {data.text}
         </div>
     )
 }
