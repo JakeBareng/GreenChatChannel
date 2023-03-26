@@ -28,9 +28,12 @@ const db = getFirestore(app);
 function App() {
   const [user] = useAuthState(auth);
   return (
-    <div className="App">
-      { user? <ChatRoom db={db}/> : <SignIn auth={auth}/> }
-    </div>
+    <>
+      <div className="container w-75 border border-secondary mx-auto align-middle">
+        { user ? <ChatRoom db={db}/> : <SignIn auth={auth}/> }
+      </div>
+    </>
+
   );
 }
 

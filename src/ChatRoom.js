@@ -2,6 +2,9 @@ import { getAuth, signOut } from "firebase/auth";
 import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 import { useState } from "react";
 import Chat from "./Chat";
+import Button from "react-bootstrap/Button"
+import Form from 'react-bootstrap/Form';
+import InputGroup from 'react-bootstrap/InputGroup';
 
 function signOutUser() {
     signOut(getAuth());
@@ -15,7 +18,7 @@ function getUserName() {
     return getAuth().currentUser.displayName;
 }
 
-async function sendMessage(message, db) {
+async function handleSubmit(message, db) {
     if (message === "") return;
     const messages = collection(db, "messages");
     try {
@@ -33,19 +36,27 @@ async function sendMessage(message, db) {
 
 function ChatRoom({ db }) {
     const [input, setInput] = useState("");
-    return (
-        <div>
-            <Chat db={db}/>
-            <input type={"text"} onChange={(e) => {
-                setInput(e.target.value)
-            }} value={input}></input>
 
-            <button onClick={() => {
-                sendMessage(input, db)
-                setInput("")
-            }}>send</button>
-            
-        </div>
+    return (
+        <>
+            <Chat db={db} />
+            <InputGroup className="mb-3">
+                <Form.Control
+                    type="text"
+                    placeholder="Message..."
+                    onChange={(e) => {
+                        setInput(e.target.value)
+                    }}
+                    value={input}
+                />
+                <Button onClick={() => {
+                    handleSubmit(input, db)
+                    setInput("")
+                }}>
+                    send
+                </Button>
+            </InputGroup>
+        </>
     )
 }
 
