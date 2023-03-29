@@ -20,6 +20,7 @@ function getUserName() {
 
 async function handleSubmit(message, db) {
     if (message === "") return;
+    if (typeof message !== "string") return;
     const messages = collection(db, "messages");
     try {
         await addDoc(messages, {
