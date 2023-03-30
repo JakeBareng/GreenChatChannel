@@ -10,7 +10,7 @@ function Chat({ db }) {
     )
 
     return (
-        <div className="overflow-auto">
+        <div className="overflow-auto mt-3 mb-3">
             {error && <strong>Error: {JSON.stringify(error)}</strong>}
             {loading && <span>Collection: Loading...</span>}
             {snapshot &&  

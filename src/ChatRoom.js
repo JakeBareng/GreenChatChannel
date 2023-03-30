@@ -40,8 +40,9 @@ function ChatRoom({ db }) {
 
     return (
         <>
-            <Chat db={db} />
+            <Chat db={db}/>
             <InputGroup className="mb-3">
+                <Button onClick={signOutUser} className="float-right">Logout</Button>
                 <Form.Control
                     type="text"
                     placeholder="Message..."

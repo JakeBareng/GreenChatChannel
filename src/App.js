@@ -10,6 +10,7 @@ import SignIn from './SignIn';
 import ChatRoom from './ChatRoom';
 import { getAuth } from 'firebase/auth';
 import { getFirestore } from 'firebase/firestore';
+import Chat from './Chat';
 
 const app = firebase.initializeApp({
   apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
@@ -28,12 +29,17 @@ const db = getFirestore(app);
 function App() {
   const [user] = useAuthState(auth);
   return (
-    <>
-      <div className="w-75 h-75 container border border-secondary d-flex flex-column justify-content-md-around">
-        { user ? <ChatRoom db={db}/> : <SignIn auth={auth}/> }
-      </div>
-    </>
+    <div className="w-75 h-75 container border border-secondary d-flex flex-column justify-content-md-around">
+      {user ?
+        <ChatRoom db={db} />
+        :
+        <>
+          <Chat db={db}/>
+          <SignIn auth={auth}/>
+        </>
 
+      }
+    </div>
   );
 }
 
