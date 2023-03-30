@@ -15,7 +15,7 @@ function Message({doc}) {
                 <div className="fw-bold">
                     {data.name}
                 </div>
-                <div className="fw-light">
+                <div className="fw-light text-break">
                     {data.text}
                 </div>
 
