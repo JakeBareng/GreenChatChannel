@@ -6,7 +6,7 @@ import Message from "./Message";
 
 function Chat({ db }) {
     const [snapshot, loading, error] = useCollection(
-        query(collection(db,"messages"),limit(6),orderBy("timestamp","desc"))
+        query(collection(db,"messages"),orderBy("timestamp","desc"))
     )
 
     return (

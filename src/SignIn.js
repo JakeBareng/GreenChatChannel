@@ -1,8 +1,8 @@
-import { GoogleAuthProvider, signInWithRedirect } from "firebase/auth";
+import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import Button from "react-bootstrap/Button"
 async function SignInEvent(auth) {
     const provider = new GoogleAuthProvider();
-    await signInWithRedirect(auth,provider);
+    await signInWithPopup(auth,provider);
 }
 function SignIn(props) {
     const { auth } = props;
