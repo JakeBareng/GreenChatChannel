@@ -1,3 +1,4 @@
+# Green Chat Channel
 GreenChatChannel is a web application that lets you join a massive group chat with people from all over the world. 
 
 You can chat about anything you want, from your hobbies and interests to your opinions and experiences. GreenChatChannel is very simple to use, but also very powerful and scalable.
