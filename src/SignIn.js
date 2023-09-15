@@ -7,7 +7,7 @@ async function SignInEvent(auth) {
 function SignIn(props) {
     const { auth } = props;
     return (
-        <Button className="mb-3" onClick={() => SignInEvent(auth)}>Sign in with google</Button>
+        <Button className="" onClick={() => SignInEvent(auth)}>Sign in with google</Button>
     )
 }
 

@@ -4,7 +4,6 @@ import 'firebase/compat/auth';
 import 'firebase/compat/firestore';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import 'bootstrap/dist/css/bootstrap.min.css';
-
 import SignIn from './SignIn';
 import ChatRoom from './ChatRoom';
 import { getAuth } from 'firebase/auth';
@@ -23,23 +22,22 @@ const app = firebase.initializeApp({
 });
 
 const auth = getAuth(app);
-const firestore = firebase.firestore();
 const db = getFirestore(app);
 
 function App() {
   const [user] = useAuthState(auth);
   return (
-    <div className="w-75 h-75 container border border-secondary d-flex flex-column justify-content-md-around">
-      {user ?
-        <ChatRoom db={db} />
-        :
-        <>
-          <Chat db={db}/>
-          <SignIn auth={auth}/>
-        </>
-
-      }
+    <div className='vh-100 d-flex flex-column container'>
+      <div className="h-75">
+        {user ?
+          <ChatRoom db={db} />
+          :
+          <Chat db={db} />
+        }
+      </div>
+      {user ? <></> :<SignIn auth={auth} />}
     </div>
+
   );
 }
 

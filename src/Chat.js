@@ -1,4 +1,4 @@
-import { collection, limit, orderBy, query } from "firebase/firestore"
+import { collection, orderBy, query } from "firebase/firestore"
 import { useCollection } from "react-firebase-hooks/firestore";
 import Message from "./Message";
 
@@ -10,9 +10,9 @@ function Chat({ db }) {
     )
 
     return (
-        <div className="overflow-auto mt-3 mb-3">
+        <div className="overflow-auto h-100">
             {error && <strong>Error: {JSON.stringify(error)}</strong>}
-            {loading && <span>Collection: Loading...</span>}
+            {loading && <span>loading</span>}
             {snapshot &&  
                 snapshot.docs.reverse().map((doc) => {
                     return <Message key={doc.id} doc={doc} />
