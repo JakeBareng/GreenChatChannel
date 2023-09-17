@@ -1,8 +1,8 @@
 function Message({doc}) {
     const data = doc.data()
     return (
-        <div className="row g-0 border rounded m-2 shadow-sm ">
-            <div className="col-2 d-flex justify-content-center align-items-center">            
+        <div className="row border rounded m-1 shadow-sm p-1">
+            <div className="col-3 col-sm-2 d-flex justify-content-center ">            
                 <img 
                     className="rounded-circle"
                     width={"50px"}
@@ -11,14 +11,13 @@ function Message({doc}) {
                     alt={data.name + " profile"}
                 />
             </div>
-            <div className="col p-4 d-flex flex-column position-static">
-                <div className="fw-bold">
+            <div className="col p-2">
+                <div className="row fw-bold">
                     {data.name}
                 </div>
-                <div className="fw-light text-break">
+                <div className="row text-break">
                     {data.text}
                 </div>
-
             </div>
         </div>
     )

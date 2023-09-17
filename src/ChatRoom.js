@@ -38,17 +38,25 @@ async function handleSubmit(message, db) {
 function ChatRoom({ db }) {
     const [input, setInput] = useState("");
 
+    function keydownHandler(e) {
+        if (e.keyCode === 13) {
+            handleSubmit(input, db)
+            setInput("");
+        }
+    }
+
     return (
         <>
-            <Chat db={db}/>
-            <InputGroup className="mb-3">
-                <Button onClick={signOutUser} className="float-right">Logout</Button>
+            <Chat db={db} />
+            <InputGroup className="">
+                <Button onClick={signOutUser} className="">Logout</Button>
                 <Form.Control
                     type="text"
                     placeholder="Message..."
                     onChange={(e) => {
                         setInput(e.target.value)
                     }}
+                    onKeyDown={keydownHandler}
                     value={input}
                 />
                 <Button onClick={() => {
