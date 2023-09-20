@@ -5,7 +5,7 @@ import 'firebase/compat/firestore';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import SignIn from './SignIn';
-import ChatRoom from './ChatRoom';
+import ChatInterface from './ChatInterface';
 import { getAuth } from 'firebase/auth';
 import { getFirestore } from 'firebase/firestore';
 import Chat from './Chat';
@@ -30,7 +30,11 @@ function App() {
     <div className="container-fluid container-md p-md-3 h-100 py-3" >
       <div className="card p-2 h-100">
         {user ?
-            <ChatRoom db={db} />
+          <>
+            <Chat db={db} />
+            <ChatInterface db={db} />
+          </>
+
           :
           <>
             <Chat db={db} />

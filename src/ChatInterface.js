@@ -1,7 +1,6 @@
 import { getAuth, signOut } from "firebase/auth";
 import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 import { useState } from "react";
-import Chat from "./Chat";
 import Button from "react-bootstrap/Button"
 import Form from 'react-bootstrap/Form';
 import InputGroup from 'react-bootstrap/InputGroup';
@@ -18,36 +17,32 @@ function getUserName() {
     return getAuth().currentUser.displayName;
 }
 
-async function handleSubmit(message, db) {
-    if (message === "") return;
-    if (typeof message !== "string") return;
-    const messages = collection(db, "messages");
-    try {
-        await addDoc(messages, {
-            name: getUserName(),
-            text: message,
-            pfp: getProfilePicUrl(),
-            timestamp: serverTimestamp()
-        });
-    }
-    catch (error) {
-        console.error('Error writing new message to Firebase Database', error);
-    }
-}
-
-function ChatRoom({ db }) {
+function ChatInterface({ db }) {
     const [input, setInput] = useState("");
-
+    async function handleSubmit(message) {
+        if (typeof message !== "string" || message.trim() === "" || !getAuth()) return;
+        const messages = collection(db, "messages");
+        try {
+            await addDoc(messages, {
+                name: getUserName(),
+                text: message,
+                pfp: getProfilePicUrl(),
+                timestamp: serverTimestamp()
+            });
+        }
+        catch (error) {
+            console.error('Error writing new message', error);
+        }
+    }
     function keydownHandler(e) {
         if (e.keyCode === 13) {
-            handleSubmit(input, db)
+            handleSubmit(input)
             setInput("");
         }
     }
 
     return (
         <>
-            <Chat db={db} />
             <InputGroup className="">
                 <Button onClick={signOutUser} className="">Logout</Button>
                 <Form.Control
@@ -60,7 +55,7 @@ function ChatRoom({ db }) {
                     value={input}
                 />
                 <Button onClick={() => {
-                    handleSubmit(input, db)
+                    handleSubmit(input)
                     setInput("")
                 }}>
                     send
@@ -71,4 +66,4 @@ function ChatRoom({ db }) {
 }
 
 
-export default ChatRoom;
+export default ChatInterface;
