@@ -6,7 +6,6 @@ import { getAuth } from "firebase/auth";
 
 
 function Chat({ db }) {
-    console.log(getAuth());
     const [snapshot, loading, error] = useCollection(
         query(collection(db,"messages"),orderBy("timestamp","desc"))
     )
